@@ -1,8 +1,9 @@
-const express = require('express');
-const { v4: uuidv4 } = require('uuid');
+import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
+import http from 'http';
 
 const app = express();
-const server = require('http').Server(app);
+const server = http.Server(app);
 
 app.set('view engine', 'ejs');
 
