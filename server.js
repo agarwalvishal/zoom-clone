@@ -7,6 +7,9 @@ const server = http.Server(app);
 
 app.set('view engine', 'ejs');
 
+// Use the pulbic directory to serve static files
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
   res.redirect(`/${uuidv4()}`);
 });
