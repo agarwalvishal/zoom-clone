@@ -3,4 +3,4 @@ build:
     release:
        dockerfile: Dockerfile
        target: production
-    web: Dockerfile
+    # web: Dockerfile
