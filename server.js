@@ -6,6 +6,18 @@ import { ExpressPeerServer } from 'peer';
 
 console.log('process.env.PORT:', process.env.PORT);
 const PORT = process.env.PORT || 3000;
+let PEER_PORT = undefined;
+
+console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`process.env.PEER_PORT: ${process.env.PEER_PORT}`);
+
+// If not in production & not using docker compose to pass PEER_PORT env variable,
+// use default port 3000 for peerjs client
+if (process.env.NODE_ENV !== 'production' && !process.env.PEER_PORT) {
+  PEER_PORT = 3000;
+} else {
+  PEER_PORT = process.env.PEER_PORT;
+}
 
 const app = express();
 const server = http.Server(app);
@@ -27,7 +39,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:room', (req, res) => {
-  res.render('room', { roomId: req.params.room, port: PORT }); // Pass PORT to frontend for peerjs endpoint requests
+  // Also pass PEER_PORT to frontend for peerjs endpoint requests
+  res.render('room', { roomId: req.params.room, peerPort: PEER_PORT });
 });
 
 server.listen(PORT, () => {

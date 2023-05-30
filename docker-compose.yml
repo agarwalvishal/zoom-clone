@@ -17,3 +17,4 @@ services:
     environment:
       - NODE_ENV=dev
       - PORT=${PORT} # Pass PORT env variable to access as it process.env.PORT in the nodejs app
+      - PEER_PORT=${PORT} # Pass PEER_PORT env variable to access as it process.env.PEER_PORT in the nodejs app
