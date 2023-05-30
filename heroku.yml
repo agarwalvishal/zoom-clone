@@ -1,9 +1,9 @@
 build:
   docker:
+    worker: worker/Dockerfile
     release:
       dockerfile: Dockerfile
       target: production
-      worker: worker/Dockerfile
 release:
   image: worker
 run:
