@@ -4,9 +4,12 @@ import http from 'http';
 import { Server } from 'socket.io';
 import { ExpressPeerServer } from 'peer';
 
+console.log('process.env.PORT:', process.env.PORT);
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 const server = http.Server(app);
-const io = new Server(server);//, {cors: {origin: '*'}});
+const io = new Server(server);
 
 // Combining peer with existing express app
 const peerServer = ExpressPeerServer(server, {
@@ -24,11 +27,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:room', (req, res) => {
-  res.render('room', { roomId: req.params.room });
+  res.render('room', { roomId: req.params.room, port: PORT }); // Pass PORT to frontend for peerjs endpoint requests
 });
 
-server.listen(3000, () => {
-  console.log('app is running on localhost:3000');
+server.listen(PORT, () => {
+  console.log(`app is running on localhost:${PORT}`);
 });
 
 io.on('connection', socket => {

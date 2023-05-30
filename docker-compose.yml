@@ -1,9 +1,19 @@
-version: '3'
+# Remove version tag as per explanation below:
+# A Compose implementation SHOULD NOT use this version to select
+# an exact schema to validate the Compose file, but prefer the
+# most recent schema at the time it has been designed.
+# Ref: https://docs.docker.com/compose/compose-file/04-version-and-name/
+# version: '3'
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      target: dev
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}" # Access the PORT env variable from .env file
     volumes:
       - .:/app
+    environment:
+      - NODE_ENV=dev
+      - PORT=${PORT} # Pass PORT env variable to access as it process.env.PORT in the nodejs app
