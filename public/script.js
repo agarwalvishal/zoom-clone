@@ -5,7 +5,7 @@ myVideo.muted = true;
 
 const peer = new Peer(undefined, {
   host: '/',
-  port: PEER_PORT || 443, // PEER_PORT is set in the dev environment and defaults to 443 for production
+  port: PEER_PORT, // PEER_PORT is set in the dev environment and defaults to 443 for production
   path: '/peerjs'
 });
 

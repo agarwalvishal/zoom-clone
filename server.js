@@ -12,12 +12,17 @@ console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`process.env.PEER_PORT: ${process.env.PEER_PORT}`);
 
 // If not in production & not using docker compose to pass PEER_PORT env variable,
+// i.e., the app is started using npm instead of using docker compose
 // use default port 3000 for peerjs client
-if (process.env.NODE_ENV !== 'production' && !process.env.PEER_PORT) {
-  PEER_PORT = 3000;
-} else {
+if (process.env.NODE_ENV === 'production') {
+  PEER_PORT = 443;
+} else if (process.env.NODE_ENV !== 'production' && process.env.PEER_PORT) {
   PEER_PORT = process.env.PEER_PORT;
+} else {
+  PEER_PORT = 3000;
 }
+
+console.log(`Passing to frontend PEER_PORT: ${PEER_PORT}`);
 
 const app = express();
 const server = http.Server(app);
