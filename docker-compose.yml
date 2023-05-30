@@ -9,7 +9,7 @@ services:
   web:
     build:
       context: .
-      target: dev
+      target: development
     ports:
       - "${PORT}:${PORT}" # Access the PORT env variable from .env file
     volumes:

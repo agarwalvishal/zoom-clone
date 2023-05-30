@@ -15,8 +15,7 @@ RUN npm ci
 COPY . .
 CMD ["npm", "start"]
 
-
-FROM base as dev
+FROM base as develpoment
 ENV NODE_ENV=development
 RUN npm install -g nodemon && npm install
 COPY . .
