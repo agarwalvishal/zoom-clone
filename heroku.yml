@@ -3,6 +3,6 @@ build:
     release:
       dockerfile: Dockerfile
       target: production
-release:
-  command: npm start
+run:
+  web: npm start
     # web: Dockerfile
