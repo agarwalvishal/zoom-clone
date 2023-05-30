@@ -3,7 +3,9 @@ build:
     release:
       dockerfile: Dockerfile
       target: production
-      image: worker
+      worker: worker/Dockerfile
+release:
+  image: worker
 run:
   web: npm start
   worker:
